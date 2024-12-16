@@ -1,0 +1,44 @@
+import { useEffect } from "react";
+import { useState } from "react";
+import { createContext } from "react";
+
+export interface User {
+    name: string;
+    age: number;
+    isMarried: boolean;
+}
+
+interface UserContextType {
+    users: User[] | null;
+    addUser: (user: User) => void; 
+    updateUser: (id: string) => void; 
+    deleteUser: (id: string) => void; 
+}
+
+const contextInitialValues = {
+    users: null,
+    addUser: () => null,
+    updateUser: () => null,
+    deleteUser: () => null,
+};
+
+export const UserContext = createContext<UserContextType>(contextInitialValues);
+
+
+interface Props {
+    children: React.ReactNode;
+}
+
+export const UserProvider = (props: Props) => {
+    const [users, setUsers] = useState<User[] | null>(null)
+
+    useEffect(() => {
+        setUsers([{name: "Lars", age: 27, isMarried: false}]);
+    }, []);
+
+    const addUser = (user: User) => null
+    const deleteUser = (id: string) => null
+    const updateUser = (id: string) => null
+
+    return <UserContext.Provider value={{users, addUser, deleteUser, updateUser}}> {props.children}</UserContext.Provider>;
+};

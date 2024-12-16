@@ -1,20 +1,21 @@
 import './App.css'
-import { Person } from "./Person";
+import { User, Countries } from "./Person";
+import { UserProvider } from './UserContextProvider';
 
 function App() {
 
-  const testUser = () => ({ name: "Pedro", age: 25, isMarried: true});
-  const testedUser = testUser();
+  //const testUser = () => ({ name: "Pedro", age: 25, isMarried: true});
+  //const testedUser = testUser();
+  // -> <Person name={testedUser.name} age={testedUser.age} isMarried={testedUser.isMarried}/>{""}
 
   return (
-    <>
+    <UserProvider>
       {"--------"}
-      <Person name={"Henry"} age={22} isMarried={false}/>{""}
+      <User name={"Henry"} age={22} isMarried={false} country={Countries.Brazil} />{""}
       {"--------"}
-      <Person name={"Paul"} age={34} isMarried={true}/>{""}
+      <User name={"Paul"} age={34} isMarried={true} country={Countries.France} />{""}
       {"--------"}
-      <Person name={testedUser.name} age={testedUser.age} isMarried={testedUser.isMarried}/>{""}
-    </>
+    </UserProvider>
   );
 }
 
